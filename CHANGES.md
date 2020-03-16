@@ -8,7 +8,8 @@ Improvements 🙌:
  -
 
 Bugfix 🐛:
- -  Message transitions in encrypted rooms are jarring #518
+ - Message transitions in encrypted rooms are jarring #518
+ - Images that failed to send are waiting to be sent forever #1145
 
 Translations 🗣:
  -
