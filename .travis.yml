@@ -38,23 +38,5 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-# Build with the development SDK
-before_script:
-  # Not necessary for the moment
-  # - /bin/sh ./set_debug_env.sh
-
-# Just build the project for now
-script:
-  # Build app (assembleGplayRelease assembleFdroidRelease)
-  # Build Android test (assembleAndroidTest) (disabled for now)
-  # Code quality (lintGplayRelease lintFdroidRelease)
-  # Split into two steps because if a task contain Fdroid, PlayService will be disabled
-  # Done by Buildkite now: - ./gradlew clean assembleGplayRelease lintGplayRelease --stacktrace
-  # Done by Buildkite now: - ./gradlew clean assembleFdroidRelease lintFdroidRelease --stacktrace
-  # Run unitary test (Disable for now, see https://travis-ci.org/vector-im/riot-android/builds/502504370)
-  # - ./gradlew testGplayReleaseUnitTest --stacktrace
-  # Other code quality check
-  # Done by Buildkite now: - ./tools/check/check_code_quality.sh
-  - ./tools/travis/check_pr.sh
-  # Check that indonesians file are identical. Due to Android issue, the resource folder must be value-in/, and Weblate export data into value-id/.
-  # Done by Buildkite now: - diff ./vector/src/main/res/values-id/strings.xml ./vector/src/main/res/values-in/strings.xml
+after_success:
+  - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
